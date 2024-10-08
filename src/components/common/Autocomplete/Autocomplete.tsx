@@ -11,6 +11,7 @@ interface AutocompleteProps {
   placeholder: string;
   startIcon?: React.ReactNode;
   loading?: boolean;
+  onInputChange?: (inputValue: string) => void;
 }
 
 const Autocomplete: React.FC<AutocompleteProps> = ({
@@ -19,6 +20,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   placeholder,
   startIcon,
   loading,
+  onInputChange,
 }) => {
   const [inputValue, setInputValue] = useState<string>("");
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
@@ -41,8 +43,8 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
     setHighlightedIndex(-1); // Reset highlight when typing
+    setInputValue(e.target.value);
   };
 
   const handleSelectItem = (item: string) => {
@@ -66,7 +68,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     }
   };
 
-  // Filter suggestions based on input
+  // Filters suggestions and debounces the input change event
   useEffect(() => {
     if (inputValue.trim() === "") {
       setFilteredSuggestions(suggestions);
@@ -76,7 +78,15 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
       );
       setFilteredSuggestions(filtered);
     }
-  }, [inputValue, suggestions]);
+
+    const handler = setTimeout(() => {
+      if (onInputChange) onInputChange(inputValue);
+    }, 700);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [inputValue, suggestions, onInputChange]);
 
   // Close dropdown when clicking outside the autocomplete
   useEffect(() => {
