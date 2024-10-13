@@ -31,10 +31,11 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleToggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const handleInputFocus = () => inputRef.current?.focus();
 
   const handleClearInput = () => {
     setInputValue("");
-    inputRef.current?.focus();
+    handleInputFocus();
   };
 
   const closeDropdown = () => {
@@ -66,6 +67,11 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     } else if (e.key === "Escape") {
       closeDropdown();
     }
+  };
+
+  const handleBoxClick = () => {
+    handleToggleDropdown();
+    handleInputFocus();
   };
 
   // Filters suggestions and debounces the input change event
@@ -107,10 +113,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
 
   return (
     <div className="autocomplete" ref={autocompleteRef}>
-      <Flex
-        className="autocomplete__input-wrapper"
-        onClick={handleToggleDropdown}
-      >
+      <Flex className="autocomplete__input-wrapper" onClick={handleBoxClick}>
         {startIcon && (
           <Center className="autocomplete__start-icon">{startIcon}</Center>
         )}

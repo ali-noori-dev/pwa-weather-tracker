@@ -1,33 +1,36 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { ApiState } from "../../types";
 import { handleApiError, initialState } from "./apiStateUtils";
 
 interface UseGetApiArgs<T, P> {
   apiMethod: (...args: P[]) => Promise<T>;
   params: P[];
+  enabled?: boolean;
 }
 
 const useGetApi = <T, P = unknown>({
   apiMethod,
   params,
+  enabled = true,
 }: UseGetApiArgs<T, P>) => {
   const [state, setState] = useState<ApiState<T>>(initialState<T>());
-
-  // Memoize params to avoid re-running useEffect on every render.
-  const memoizedParams = useMemo(() => params, [params]);
 
   useEffect(() => {
     const fetchData = async () => {
       setState({ ...initialState(), loading: true });
       try {
-        const data = await apiMethod(...memoizedParams);
+        const data = await apiMethod(...params);
         setState({ ...initialState(), data });
       } catch (error) {
         handleApiError(error, setState);
       }
     };
-    fetchData();
-  }, [apiMethod, memoizedParams]); // Re-fetch when params change
+
+    if (enabled) fetchData();
+  }, [
+    ...params, // Re-fetch when params change
+    enabled,
+  ]);
 
   return state;
 };
