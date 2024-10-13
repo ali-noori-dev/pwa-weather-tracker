@@ -8,9 +8,27 @@ export interface ApiErrorResponse {
   message: string;
 }
 
-export interface CitySuggestion {
+export interface CitySearchResult {
+  data: CityDetails[];
+  metadata: Metadata;
+}
+
+export interface CityDetails {
+  id: number;
+  wikiDataId: string;
+  type: string;
   name: string;
   country: string;
-  lat: number;
-  lon: number;
+  countryCode: string;
+  region: string;
+  regionCode: string;
+  regionWdId: string;
+  latitude: number;
+  longitude: number;
+  population: number;
+}
+
+export interface Metadata {
+  currentOffset: number;
+  totalCount: number;
 }
