@@ -32,7 +32,11 @@ const useGetApi = <T, P = unknown>({
     enabled,
   ]);
 
-  return state;
+  const reset = () => {
+    setState(initialState());
+  };
+
+  return { ...state, reset };
 };
 
 export default useGetApi;
