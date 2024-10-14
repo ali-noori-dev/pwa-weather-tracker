@@ -10,10 +10,10 @@ export interface ApiErrorResponse {
 
 export interface CitySearchResult {
   data: CityDetails[];
-  metadata: Metadata;
+  metadata: CityMetadata;
 }
 
-export interface CityDetails {
+interface CityDetails {
   id: number;
   wikiDataId: string;
   type: string;
@@ -28,7 +28,63 @@ export interface CityDetails {
   population: number;
 }
 
-export interface Metadata {
+interface CityMetadata {
   currentOffset: number;
   totalCount: number;
+}
+
+export interface WeatherDetails {
+  coord: Coordinates;
+  weather: WeatherElement[];
+  base: string;
+  main: MainWeatherData;
+  visibility: number;
+  wind: Wind;
+  clouds: CloudsInfo;
+  dt: number;
+  sys: LocationDetails;
+  timezone: number;
+  id: number;
+  name: string;
+  cod: number;
+}
+
+interface CloudsInfo {
+  all: number;
+}
+
+interface Coordinates {
+  lon: number;
+  lat: number;
+}
+
+interface MainWeatherData {
+  temp: number;
+  feels_like: number;
+  temp_min: number;
+  temp_max: number;
+  pressure: number;
+  humidity: number;
+  sea_level: number;
+  grnd_level: number;
+}
+
+export interface LocationDetails {
+  type: number;
+  id: number;
+  country: string;
+  sunrise: number;
+  sunset: number;
+}
+
+export interface WeatherElement {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
+export interface Wind {
+  speed: number;
+  deg: number;
 }
