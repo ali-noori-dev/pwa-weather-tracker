@@ -1,0 +1,33 @@
+@use "styles/breakpoints";
+@use "styles/variables";
+@use "styles/functions";
+
+.weather-search {
+  height: 100%;
+
+  &__container {
+    height: 60%;
+    width: 40%;
+    max-width: 600px;
+    padding: functions.spacing(12);
+    border-radius: 20px;
+
+    background: linear-gradient(
+      to top left,
+      variables.$primary-color-dark,
+      variables.$primary-color-light
+    );
+
+    @include breakpoints.respond-to(md) {
+      width: 60%;
+    }
+
+    @include breakpoints.respond-to(sm) {
+      width: 80%;
+    }
+
+    @include breakpoints.respond-to(xs) {
+      width: 100%;
+    }
+  }
+}

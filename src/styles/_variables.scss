@@ -2,6 +2,8 @@
 
 // Colors
 $primary-color: #1976d2;
+$primary-color-light: lighten($primary-color, 20%);
+$primary-color-dark: darken($primary-color, 20%);
 $secondary-color: #2ecc71;
 $text-color: #333;
 $text-muted-color: #999;

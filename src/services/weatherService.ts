@@ -16,7 +16,7 @@ export const fetchCitySuggestions = async (
       limit: 10,
       offset: 0,
       types: "CITY",
-      minPopulation: 500000,
+      minPopulation: 100000,
     },
     headers: {
       "x-rapidapi-key": API_KEY,

@@ -75,8 +75,10 @@ export default defineConfig({
     },
   },
   resolve: {
+    // Set up alias for cleaner imports
     alias: {
-      "@": "/src", // Set up alias for cleaner imports
+      "@": "/src",
+      styles: "/src/styles",
     },
   },
   server: {
