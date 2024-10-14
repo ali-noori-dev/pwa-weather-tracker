@@ -5,6 +5,7 @@ A Progressive Web App (PWA) built with **React**, **TypeScript**, and **Vite** f
 ## **Features**
 
 - **Real-time Weather Data**: Fetches live weather data using the [OpenWeatherMap API](https://openweathermap.org/api).
+- **City Search Suggestions**: Retrieves city suggestions as the user types using the [GeoDB Cities API](https://rapidapi.com/wirefreethought/api/geodb-cities/).
 - **Offline Support**: Works offline by caching API responses and static assets.
 - **Push Notifications**: Get weather alerts even when the app is closed.
 - **Installable**: Can be installed as a native app on mobile and desktop devices using PWA technology.
@@ -102,7 +103,8 @@ Contributions are welcome! Please follow these steps:
 
 ## **Acknowledgments**
 
-- [Vite](https://vitejs.dev/)
 - [React](https://reactjs.org/)
-- [OpenWeatherMap API](https://openweathermap.org/api)
+- [Vite](https://vitejs.dev/)
 - [Vite PWA Plugin](https://vite-plugin-pwa.netlify.app/)
+- [OpenWeatherMap API](https://openweathermap.org/api)
+- [GeoDB Cities API](https://rapidapi.com/wirefreethought/api/geodb-cities/)

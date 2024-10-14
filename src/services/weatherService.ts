@@ -7,6 +7,9 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const fetchCitySuggestions = async (
   query: string
 ): Promise<string[]> => {
+  // Only make the request if there is a query
+  if (!query.trim()) return [];
+
   const response = await axios.get<CitySearchResult>(`${BASE_URL}/places`, {
     params: {
       namePrefix: query,
