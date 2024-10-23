@@ -1,21 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FiX } from "react-icons/fi";
+import { AutocompleteOption, AutocompleteProps } from "../../../types";
 import Center from "../Center/Center";
 import Flex from "../Flex/Flex";
 import Spinner from "../Spinner/Spinner";
 import "./Autocomplete.scss";
 
-interface AutocompleteProps {
-  suggestions: string[];
-  onSelect: (selectedItem: string) => void;
-  placeholder: string;
-  startIcon?: React.ReactNode;
-  loading?: boolean;
-  onInputChange?: (inputValue: string) => void;
-}
-
 const Autocomplete: React.FC<AutocompleteProps> = ({
-  suggestions,
+  options,
   onSelect,
   placeholder,
   startIcon,
@@ -23,7 +15,9 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   onInputChange,
 }) => {
   const [inputValue, setInputValue] = useState<string>("");
-  const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
+  const [filteredOptions, setFilteredOptions] = useState<AutocompleteOption[]>(
+    []
+  );
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
 
@@ -48,22 +42,23 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     setInputValue(e.target.value);
   };
 
-  const handleSelectItem = (item: string) => {
+  const handleSelectItem = (item: AutocompleteOption) => {
     onSelect(item);
+    setInputValue(item.label);
     closeDropdown();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "ArrowDown") {
       setHighlightedIndex((prevIndex) =>
-        prevIndex < filteredSuggestions.length - 1 ? prevIndex + 1 : prevIndex
+        prevIndex < filteredOptions.length - 1 ? prevIndex + 1 : prevIndex
       );
     } else if (e.key === "ArrowUp") {
       setHighlightedIndex((prevIndex) =>
         prevIndex > 0 ? prevIndex - 1 : prevIndex
       );
     } else if (e.key === "Enter" && highlightedIndex >= 0) {
-      handleSelectItem(filteredSuggestions[highlightedIndex]);
+      handleSelectItem(filteredOptions[highlightedIndex]);
     } else if (e.key === "Escape") {
       closeDropdown();
     }
@@ -74,15 +69,15 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     handleInputFocus();
   };
 
-  // Filters suggestions and debounces the input change event
+  // Filters options and debounces the input change event
   useEffect(() => {
     if (inputValue.trim() === "") {
-      setFilteredSuggestions(suggestions);
+      setFilteredOptions(options);
     } else {
-      const filtered = suggestions.filter((item) =>
-        item.toLowerCase().includes(inputValue.toLowerCase())
+      const filtered = options.filter((item) =>
+        item.label.toLowerCase().includes(inputValue.toLowerCase())
       );
-      setFilteredSuggestions(filtered);
+      setFilteredOptions(filtered);
     }
 
     const handler = setTimeout(() => {
@@ -92,7 +87,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     return () => {
       clearTimeout(handler);
     };
-  }, [inputValue, suggestions, onInputChange]);
+  }, [inputValue, options, onInputChange]);
 
   // Close dropdown when clicking outside the autocomplete
   useEffect(() => {
@@ -143,22 +138,22 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
       </Flex>
 
       {isDropdownOpen && (
-        <ul className="autocomplete__suggestions">
+        <ul className="autocomplete__options">
           {loading ? (
             <li className="autocomplete__message">Loading...</li>
-          ) : filteredSuggestions.length > 0 ? (
-            filteredSuggestions.map((item, index) => (
+          ) : filteredOptions.length > 0 ? (
+            filteredOptions.map((item, index) => (
               <li
-                key={item}
+                key={item.label}
                 onClick={() => handleSelectItem(item)}
                 onMouseEnter={() => setHighlightedIndex(index)}
-                className={`autocomplete__suggestion ${
+                className={`autocomplete__option ${
                   highlightedIndex === index
-                    ? "autocomplete__suggestion--highlighted"
+                    ? "autocomplete__option--highlighted"
                     : ""
                 }`}
               >
-                {item}
+                {item.label}
               </li>
             ))
           ) : (

@@ -2,25 +2,32 @@ import { useEffect, useState } from "react";
 import { ApiState } from "../../types";
 import { handleApiError, initialState } from "./apiStateUtils";
 
-interface UseGetApiArgs<T, P> {
+interface UseGetApiArgs<T, P, R = T> {
   apiMethod: (...args: P[]) => Promise<T>;
   params: P[];
   enabled?: boolean;
+  transform?: (data: T) => R;
 }
 
-const useGetApi = <T, P = unknown>({
+const useGetApi = <T, P = unknown, R = T>({
   apiMethod,
   params,
   enabled = true,
-}: UseGetApiArgs<T, P>) => {
-  const [state, setState] = useState<ApiState<T>>(initialState<T>());
+  transform,
+}: UseGetApiArgs<T, P, R>) => {
+  const [state, setState] = useState<ApiState<R>>(initialState<R>());
 
   useEffect(() => {
     const fetchData = async () => {
       setState({ ...initialState(), loading: true });
       try {
-        const data = await apiMethod(...params);
-        setState({ ...initialState(), data });
+        const data: T = await apiMethod(...params);
+
+        const transformedData = transform
+          ? transform(data)
+          : (data as unknown as R);
+
+        setState({ ...initialState(), data: transformedData });
       } catch (error) {
         handleApiError(error, setState);
       }
