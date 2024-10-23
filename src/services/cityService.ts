@@ -1,12 +1,12 @@
 import axios from "axios";
-import { CitySearchResult } from "../types";
+import { CityDetails, CitySearchResult } from "../types";
 
 const BASE_URL = import.meta.env.VITE_GEODB_API_BASE_URL;
 const API_KEY = import.meta.env.VITE_GEODB_API_KEY;
 
 export const fetchCitySuggestions = async (
   query: string
-): Promise<string[]> => {
+): Promise<CityDetails[]> => {
   // Only make the request if there is a query
   if (!query.trim()) return [];
 
@@ -28,5 +28,5 @@ export const fetchCitySuggestions = async (
   );
 
   // Extracts and returns an array of city names from the API response.
-  return response.data.data.map((place: { name: string }) => place.name);
+  return response.data.data;
 };

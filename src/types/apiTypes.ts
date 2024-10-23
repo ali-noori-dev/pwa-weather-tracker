@@ -13,7 +13,7 @@ export interface CitySearchResult {
   metadata: CityMetadata;
 }
 
-interface CityDetails {
+export interface CityDetails {
   id: number;
   wikiDataId: string;
   type: string;
