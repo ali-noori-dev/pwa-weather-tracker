@@ -30,4 +30,15 @@
       width: 100%;
     }
   }
+
+  &__message {
+    height: 100%;
+    font-size: functions.spacing(5);
+    color: white;
+    opacity: 0.7;
+  }
+
+  &__details {
+    // margin-top: functions.spacing(5);
+  }
 }

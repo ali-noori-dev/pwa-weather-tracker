@@ -2,20 +2,25 @@ import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { useGetApi } from "../../hooks";
 import { fetchCitySuggestions, fetchWeatherByCity } from "../../services";
-import { AutocompleteOption } from "../../types";
-import { Autocomplete, Center } from "../common";
+import { AutocompleteOption, CityDetails } from "../../types";
+import { Autocomplete, Center, VerticalFlex } from "../common";
+import WeatherIcon from "../WeatherIcon/WeatherIcon";
 import "./WeatherSearch.scss";
 
 const WeatherSearch: React.FC = () => {
   const [city, setCity] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("");
 
+  const transformCitySuggestions = (
+    data: CityDetails[]
+  ): AutocompleteOption[] => {
+    return data.map((item) => ({ label: item.name }));
+  };
+
   const { data: suggestions = [], loading: loadingSuggestions } = useGetApi({
     apiMethod: fetchCitySuggestions,
     params: [city],
-    transform(data) {
-      return data.map((item) => ({ label: item.name })) as AutocompleteOption[];
-    },
+    transform: transformCitySuggestions,
   });
 
   const {
@@ -41,8 +46,6 @@ const WeatherSearch: React.FC = () => {
     setSelectedCity(selectedItem.label);
   };
 
-  console.log(weather);
-
   return (
     <Center className="weather-search">
       <div className="weather-search__container">
@@ -56,13 +59,19 @@ const WeatherSearch: React.FC = () => {
         />
 
         {loadingWeather ? (
-          <p>Loading weather data...</p>
+          <Center className="weather-search__message">
+            Loading weather data...
+          </Center>
         ) : weather ? (
-          <div>
-            <h3>Weather in {selectedCity}</h3>
-          </div>
+          <VerticalFlex className="weather-search__details" justify="center">
+            <Center>
+              <WeatherIcon iconCode={weather.weather[0].icon} />
+            </Center>
+          </VerticalFlex>
         ) : (
-          <p>Select a city to see the weather</p>
+          <Center className="weather-search__message">
+            Select a city to see the weather
+          </Center>
         )}
       </div>
     </Center>
