@@ -2,7 +2,7 @@ import { Property } from "csstype";
 import React from "react";
 import "./Flex.scss";
 
-interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
   direction?: Property.FlexDirection;
   justify?: Property.JustifyContent;
   align?: Property.AlignItems;
