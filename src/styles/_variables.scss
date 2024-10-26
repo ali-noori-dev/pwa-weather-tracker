@@ -1,9 +1,10 @@
+@use "sass:color";
 @use "functions";
 
 // Colors
 $primary-color: #1976d2;
-$primary-color-light: lighten($primary-color, 20%);
-$primary-color-dark: darken($primary-color, 20%);
+$primary-color-light: color.scale($primary-color, $lightness: 40%);
+$primary-color-dark: color.scale($primary-color, $lightness: -40%);
 $secondary-color: #2ecc71;
 $text-color: #333;
 $text-muted-color: #999;
