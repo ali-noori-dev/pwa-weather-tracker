@@ -8,10 +8,11 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate", // Automatically update the service worker in the background
       includeAssets: [
-        "favicon.svg",
-        "favicon.ico",
+        "icons/favicon.svg",
+        "icons/favicon.ico",
         "robots.txt",
-        "apple-touch-icon.png",
+        "icons/apple-touch-icon.png",
+        "images/background.jpg",
       ],
       manifest: {
         name: "PWA Weather Tracker",
@@ -24,12 +25,12 @@ export default defineConfig({
         start_url: "/", // Entry point when launched from home screen
         icons: [
           {
-            src: "/android-chrome-192x192.png",
+            src: "/icons/android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "/android-chrome-512x512.png",
+            src: "/icons/android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
           },

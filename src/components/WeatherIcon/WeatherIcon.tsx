@@ -1,11 +1,15 @@
+import React from "react";
+import { weatherIconPaths } from "../../constants";
+import "./WeatherIcon.scss";
+
 interface WeatherIconProps {
   iconCode: string;
 }
 
 const WeatherIcon: React.FC<WeatherIconProps> = ({ iconCode }) => {
-  const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@4x.png`;
+  const iconPath = weatherIconPaths[iconCode] || "/icons/day.svg"; // Default to day icon if code not found
 
-  return <img src={iconUrl} alt="Weather Icon" className="weather-icon" />;
+  return <img src={iconPath} alt="Weather Icon" className="weather-icon" />;
 };
 
 export default WeatherIcon;
