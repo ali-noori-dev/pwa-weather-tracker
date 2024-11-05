@@ -24,7 +24,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   const autocompleteRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleToggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const openDropdown = () => setIsDropdownOpen(true);
   const handleInputFocus = () => inputRef.current?.focus();
 
   const handleClearInput = () => {
@@ -65,7 +65,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   };
 
   const handleBoxClick = () => {
-    handleToggleDropdown();
+    openDropdown();
     handleInputFocus();
   };
 
@@ -121,7 +121,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           className="autocomplete__input"
-          onClick={handleToggleDropdown}
+          onClick={openDropdown}
         />
 
         {loading && <Spinner className="autocomplete__spinner" />}

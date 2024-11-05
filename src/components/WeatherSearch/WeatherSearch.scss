@@ -6,9 +6,9 @@
   height: 100%;
 
   &__container {
-    height: 60%;
+    min-height: 60%;
     width: 40%;
-    max-width: 600px;
+    max-width: 500px;
     padding: functions.spacing(12);
     border-radius: 20px;
 
@@ -32,13 +32,38 @@
   }
 
   &__message {
-    height: 100%;
-    font-size: functions.spacing(5);
+    font-size: 20px;
     color: white;
     opacity: 0.7;
+    flex: 1;
   }
 
-  &__details {
-    // margin-top: functions.spacing(5);
+  &__result {
+    color: white;
+  }
+
+  &__temp {
+    font-size: 60px;
+    font-weight: 700;
+    margin-bottom: functions.spacing(4);
+  }
+
+  &__city-name {
+    font-size: 30px;
+    font-weight: 700;
+  }
+
+  &__stats {
+    width: 100%;
+    margin-top: functions.spacing(12);
+    justify-content: space-between;
+  }
+
+  &__humidity {
+    font-size: 30px;
+  }
+
+  &__wind {
+    font-size: 25px;
   }
 }

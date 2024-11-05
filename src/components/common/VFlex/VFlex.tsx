@@ -1,7 +1,7 @@
 import React from "react";
 import Flex, { FlexProps } from "../Flex/Flex";
 
-const VerticalFlex: React.FC<Omit<FlexProps, "direction">> = ({
+const VFlex: React.FC<Omit<FlexProps, "direction">> = ({
   children,
   ...rest
 }) => {
@@ -12,4 +12,4 @@ const VerticalFlex: React.FC<Omit<FlexProps, "direction">> = ({
   );
 };
 
-export default VerticalFlex;
+export default VFlex;

@@ -12,11 +12,11 @@ export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Flex: React.FC<FlexProps> = ({
   children,
-  direction = "row",
-  justify = "flex-start",
-  align = "stretch",
-  wrap = "nowrap",
-  gap = "0",
+  direction,
+  justify,
+  align,
+  wrap,
+  gap,
   className = "",
   ...rest
 }) => {
