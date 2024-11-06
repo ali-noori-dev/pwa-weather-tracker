@@ -24,6 +24,7 @@
 
     @include breakpoints.respond-to(sm) {
       width: 80%;
+      padding: functions.spacing(6);
     }
 
     @include breakpoints.respond-to(xs) {

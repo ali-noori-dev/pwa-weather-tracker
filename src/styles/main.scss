@@ -1,6 +1,7 @@
 @use "reset";
 @use "variables";
 @use "functions";
+@use "breakpoints";
 
 body {
   color: variables.$text-color;
@@ -23,4 +24,8 @@ body {
   background-repeat: no-repeat;
   height: 100vh;
   padding: functions.spacing(4);
+
+  @include breakpoints.respond-to(sm) {
+    background: #494949;
+  }
 }
