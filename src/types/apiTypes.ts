@@ -33,7 +33,7 @@ interface CityMetadata {
   totalCount: number;
 }
 
-export interface WeatherDetails {
+export interface WeatherData {
   coord: Coordinates;
   weather: WeatherElement[];
   base: string;

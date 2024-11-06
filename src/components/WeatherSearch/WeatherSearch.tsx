@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { FaWind } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
-import { WiHumidity } from "react-icons/wi";
 import { useGetApi } from "../../hooks";
 import { fetchCitySuggestions, fetchWeatherByCity } from "../../services";
 import { AutocompleteOption, CityDetails } from "../../types";
-import { Autocomplete, Center, Flex, VFlex } from "../common";
-import WeatherIcon from "../WeatherIcon/WeatherIcon";
+import { Autocomplete, Center, VFlex } from "../common";
+import WeatherDetails from "../WeatherDetails/WeatherDetails";
 import "./WeatherSearch.scss";
 
 const WeatherSearch: React.FC = () => {
@@ -65,41 +63,10 @@ const WeatherSearch: React.FC = () => {
             Loading weather data...
           </Center>
         ) : weatherData ? (
-          <VFlex align="center" className="weather-search__result">
-            <WeatherIcon iconCode={weatherData.weather[0].icon} />
-
-            <p className="weather-search__temp">
-              {Math.round(weatherData.main.temp)}°C
-            </p>
-
-            <h3 className="weather-search__city-name">{selectedCity}</h3>
-
-            <Flex className="weather-search__stats">
-              <Flex>
-                <WiHumidity size={60} />
-
-                <VFlex justify="center" gap="4px">
-                  <p className="weather-search__humidity">
-                    {weatherData.main.humidity}%
-                  </p>
-
-                  <p>Humidity</p>
-                </VFlex>
-              </Flex>
-
-              <Flex gap="16px" align="center">
-                <FaWind size={50} />
-
-                <VFlex justify="center" gap="4px">
-                  <p className="weather-search__wind">
-                    {Math.round(weatherData.wind.speed)} km/h
-                  </p>
-
-                  <p>Wind Speed</p>
-                </VFlex>
-              </Flex>
-            </Flex>
-          </VFlex>
+          <WeatherDetails
+            weatherData={weatherData}
+            selectedCity={selectedCity}
+          />
         ) : (
           <Center className="weather-search__message">
             Select a city to see the weather
