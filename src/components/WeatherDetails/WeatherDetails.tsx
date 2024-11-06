@@ -1,3 +1,4 @@
+import { BsBookmark, BsBookmarkCheckFill } from "react-icons/bs";
 import { FaWind } from "react-icons/fa";
 import { WiHumidity } from "react-icons/wi";
 import { WeatherData } from "../../types";
@@ -8,11 +9,15 @@ import "./WeatherDetails.scss";
 interface WeatherDetailsProps {
   weatherData: WeatherData;
   selectedCity: string;
+  isFavorite: boolean;
+  toggleFavorite: VoidFunction;
 }
 
 const WeatherDetails: React.FC<WeatherDetailsProps> = ({
   weatherData,
   selectedCity,
+  isFavorite,
+  toggleFavorite,
 }) => {
   return (
     <VFlex align="center" className="weather-details">
@@ -49,6 +54,14 @@ const WeatherDetails: React.FC<WeatherDetailsProps> = ({
           </VFlex>
         </Flex>
       </Flex>
+
+      <button
+        onClick={toggleFavorite}
+        className="weather-details__favorite-btn"
+      >
+        {isFavorite ? <BsBookmarkCheckFill /> : <BsBookmark />}{" "}
+        {isFavorite ? "Saved" : "Save"}
+      </button>
     </VFlex>
   );
 };

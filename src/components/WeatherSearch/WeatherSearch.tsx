@@ -10,6 +10,7 @@ import "./WeatherSearch.scss";
 const WeatherSearch: React.FC = () => {
   const [city, setCity] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("");
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   const transformCitySuggestions = (
     data: CityDetails[]
@@ -46,6 +47,14 @@ const WeatherSearch: React.FC = () => {
     setSelectedCity(selectedItem.label);
   };
 
+  const toggleFavorite = () => {
+    setFavorites((prevFavorites) =>
+      prevFavorites.includes(selectedCity)
+        ? prevFavorites.filter((city) => city !== selectedCity)
+        : [...prevFavorites, selectedCity]
+    );
+  };
+
   return (
     <Center className="weather-search">
       <VFlex className="weather-search__container">
@@ -66,6 +75,8 @@ const WeatherSearch: React.FC = () => {
           <WeatherDetails
             weatherData={weatherData}
             selectedCity={selectedCity}
+            isFavorite={favorites.includes(selectedCity)}
+            toggleFavorite={toggleFavorite}
           />
         ) : (
           <Center className="weather-search__message">
