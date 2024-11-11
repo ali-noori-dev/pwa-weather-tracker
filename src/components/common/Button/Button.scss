@@ -1,0 +1,30 @@
+@use "styles/functions";
+
+.button {
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: functions.spacing(2);
+  border-radius: 4px;
+
+  &--small {
+    font-size: 0.875rem;
+    padding: functions.spacing(1) functions.spacing(2);
+  }
+
+  &--medium {
+    font-size: 1rem;
+    padding: functions.spacing(2) functions.spacing(4);
+  }
+
+  &--large {
+    font-size: 1.25rem;
+    padding: functions.spacing(3) functions.spacing(6);
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+  }
+}
