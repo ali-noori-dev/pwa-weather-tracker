@@ -57,6 +57,13 @@ const WeatherSearch: React.FC = () => {
           startIcon={<FiSearch />}
           loading={loadingSuggestions}
           onInputChange={handleInputChange}
+          defaultOptions={
+            <ul>
+              {favorites.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          }
         />
 
         {loadingWeather ? (

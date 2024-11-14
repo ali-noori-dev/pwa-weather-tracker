@@ -5,6 +5,7 @@ export interface AutocompleteProps {
   startIcon?: React.ReactNode;
   loading?: boolean;
   onInputChange?: (inputValue: string) => void;
+  defaultOptions?: React.ReactNode;
 }
 
 export interface AutocompleteOption {

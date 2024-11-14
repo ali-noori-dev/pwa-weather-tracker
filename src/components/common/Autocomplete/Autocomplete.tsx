@@ -13,6 +13,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   startIcon,
   loading,
   onInputChange,
+  defaultOptions,
 }) => {
   const [inputValue, setInputValue] = useState<string>("");
   const [filteredOptions, setFilteredOptions] = useState<AutocompleteOption[]>(
@@ -70,7 +71,9 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   };
 
   const renderDropdownContent = () => {
-    if (loading) {
+    if (!inputValue && defaultOptions) {
+      return defaultOptions;
+    } else if (loading) {
       return renderMessage("Loading...");
     } else if (!filteredOptions.length) {
       return renderMessage("No options");
