@@ -69,6 +69,35 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     handleInputFocus();
   };
 
+  const renderDropdownContent = () => {
+    if (loading) {
+      return renderMessage("Loading...");
+    } else if (!filteredOptions.length) {
+      return renderMessage("No options");
+    } else {
+      return renderOptions();
+    }
+  };
+
+  const renderMessage = (message: string) => {
+    return <li className="autocomplete__message">{message}</li>;
+  };
+
+  const renderOptions = () => {
+    return filteredOptions.map((item, index) => (
+      <li
+        key={item.label}
+        onClick={() => handleSelectItem(item)}
+        onMouseEnter={() => setHighlightedIndex(index)}
+        className={`autocomplete__option ${
+          highlightedIndex === index ? "autocomplete__option--highlighted" : ""
+        }`}
+      >
+        {item.label}
+      </li>
+    ));
+  };
+
   // Filters options and debounces the input change event
   useEffect(() => {
     if (inputValue.trim() === "") {
@@ -138,28 +167,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
       </Flex>
 
       {isDropdownOpen && (
-        <ul className="autocomplete__options">
-          {loading ? (
-            <li className="autocomplete__message">Loading...</li>
-          ) : filteredOptions.length > 0 ? (
-            filteredOptions.map((item, index) => (
-              <li
-                key={item.label}
-                onClick={() => handleSelectItem(item)}
-                onMouseEnter={() => setHighlightedIndex(index)}
-                className={`autocomplete__option ${
-                  highlightedIndex === index
-                    ? "autocomplete__option--highlighted"
-                    : ""
-                }`}
-              >
-                {item.label}
-              </li>
-            ))
-          ) : (
-            <li className="autocomplete__message">No options</li>
-          )}
-        </ul>
+        <ul className="autocomplete__options">{renderDropdownContent()}</ul>
       )}
     </div>
   );
