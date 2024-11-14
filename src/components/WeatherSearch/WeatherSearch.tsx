@@ -4,6 +4,7 @@ import { useFavorites, useGetApi } from "../../hooks";
 import { fetchCitySuggestions, fetchWeatherByCity } from "../../services";
 import { AutocompleteOption, CityDetails } from "../../types";
 import { Autocomplete, Center, VFlex } from "../common";
+import FavoriteCitiesList from "../FavoriteCitiesList/FavoriteCitiesList";
 import WeatherDetails from "../WeatherDetails/WeatherDetails";
 import "./WeatherSearch.scss";
 
@@ -58,11 +59,7 @@ const WeatherSearch: React.FC = () => {
           loading={loadingSuggestions}
           onInputChange={handleInputChange}
           defaultOptions={
-            <ul>
-              {favorites.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            favorites.length > 0 && <FavoriteCitiesList favorites={favorites} />
           }
         />
 
