@@ -1,1 +1,2 @@
-export { default as useGetApi } from "./api/useGetApi";
+export * from "./api/useGetApi";
+export * from "./useFavorites";

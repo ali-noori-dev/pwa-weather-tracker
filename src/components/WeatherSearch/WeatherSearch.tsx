@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import { LocalStorageKeys } from "../../constants";
-import { useGetApi } from "../../hooks";
+import { useFavorites, useGetApi } from "../../hooks";
 import { fetchCitySuggestions, fetchWeatherByCity } from "../../services";
 import { AutocompleteOption, CityDetails } from "../../types";
-import { getLocalStorageItem, setLocalStorageItem } from "../../utils";
 import { Autocomplete, Center, VFlex } from "../common";
 import WeatherDetails from "../WeatherDetails/WeatherDetails";
 import "./WeatherSearch.scss";
@@ -12,9 +10,7 @@ import "./WeatherSearch.scss";
 const WeatherSearch: React.FC = () => {
   const [city, setCity] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("");
-  const [favorites, setFavorites] = useState<string[]>([]);
-
-  console.log(favorites);
+  const { favorites, toggleFavorite } = useFavorites(selectedCity);
 
   const transformCitySuggestions = (
     data: CityDetails[]
@@ -50,43 +46,6 @@ const WeatherSearch: React.FC = () => {
   const onSelectCity = async (selectedItem: AutocompleteOption) => {
     setSelectedCity(selectedItem.label);
   };
-
-  const addFavorite = () => {
-    setFavorites((prevFavorites) => {
-      const updatedList = [...prevFavorites, selectedCity];
-      saveFavoritesToLocalStorage(updatedList);
-      return updatedList;
-    });
-  };
-
-  const removeFavorite = () => {
-    setFavorites((prevFavorites) => {
-      const updatedList = prevFavorites.filter((city) => city !== selectedCity);
-      saveFavoritesToLocalStorage(updatedList);
-      return updatedList;
-    });
-  };
-
-  const toggleFavorite = () => {
-    const isFavorite = favorites.includes(selectedCity);
-    if (isFavorite) {
-      removeFavorite();
-    } else addFavorite();
-  };
-
-  const saveFavoritesToLocalStorage = (favorites: string[]) => {
-    setLocalStorageItem(LocalStorageKeys.FavoriteCities, favorites);
-  };
-
-  // Load favorite cities from localStorage on mount
-  useEffect(() => {
-    const savedFavorites = getLocalStorageItem(
-      LocalStorageKeys.FavoriteCities,
-      []
-    );
-
-    setFavorites(savedFavorites);
-  }, []);
 
   return (
     <Center className="weather-search">

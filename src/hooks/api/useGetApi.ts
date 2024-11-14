@@ -9,7 +9,7 @@ interface UseGetApiArgs<T, P, R = T> {
   transform?: (data: T) => R;
 }
 
-const useGetApi = <T, P = unknown, R = T>({
+export const useGetApi = <T, P = unknown, R = T>({
   apiMethod,
   params,
   enabled = true,
@@ -45,5 +45,3 @@ const useGetApi = <T, P = unknown, R = T>({
 
   return { ...state, reset };
 };
-
-export default useGetApi;
