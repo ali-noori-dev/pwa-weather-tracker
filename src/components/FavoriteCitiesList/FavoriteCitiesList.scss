@@ -1,0 +1,28 @@
+@use "styles/functions";
+@use "styles/variables";
+
+.favorite-item {
+  display: flex;
+  align-items: center;
+  padding: functions.spacing(1) functions.spacing(4);
+
+  &__bookmark-icon {
+    margin-right: functions.spacing(6);
+    color: variables.$primary-color;
+  }
+
+  &__name {
+    flex: 1;
+  }
+
+  &__remove-button {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  &:hover &__remove-button {
+    opacity: 1;
+    visibility: visible;
+  }
+}

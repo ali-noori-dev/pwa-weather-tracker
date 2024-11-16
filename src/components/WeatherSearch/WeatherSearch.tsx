@@ -11,7 +11,8 @@ import "./WeatherSearch.scss";
 const WeatherSearch: React.FC = () => {
   const [city, setCity] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("");
-  const { favorites, toggleFavorite } = useFavorites(selectedCity);
+  const { favorites, toggleFavorite, removeFavorite } =
+    useFavorites(selectedCity);
 
   const transformCitySuggestions = (
     data: CityDetails[]
@@ -59,7 +60,12 @@ const WeatherSearch: React.FC = () => {
           loading={loadingSuggestions}
           onInputChange={handleInputChange}
           defaultOptions={
-            favorites.length > 0 && <FavoriteCitiesList favorites={favorites} />
+            favorites.length > 0 && (
+              <FavoriteCitiesList
+                favorites={favorites}
+                removeFavorite={removeFavorite}
+              />
+            )
           }
         />
 
