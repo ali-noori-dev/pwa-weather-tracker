@@ -50,18 +50,31 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "ArrowDown") {
-      setHighlightedIndex((prevIndex) =>
-        prevIndex < filteredOptions.length - 1 ? prevIndex + 1 : prevIndex
-      );
-    } else if (e.key === "ArrowUp") {
-      setHighlightedIndex((prevIndex) =>
-        prevIndex > 0 ? prevIndex - 1 : prevIndex
-      );
-    } else if (e.key === "Enter" && highlightedIndex >= 0) {
-      handleSelectItem(filteredOptions[highlightedIndex]);
-    } else if (e.key === "Escape") {
-      closeDropdown();
+    switch (e.key) {
+      case "ArrowDown":
+        setHighlightedIndex((prevIndex) =>
+          prevIndex < filteredOptions.length - 1 ? prevIndex + 1 : prevIndex
+        );
+        break;
+
+      case "ArrowUp":
+        setHighlightedIndex((prevIndex) =>
+          prevIndex > 0 ? prevIndex - 1 : prevIndex
+        );
+        break;
+
+      case "Enter":
+        if (highlightedIndex >= 0) {
+          handleSelectItem(filteredOptions[highlightedIndex]);
+        }
+        break;
+
+      case "Escape":
+        closeDropdown();
+        break;
+
+      default:
+        break;
     }
   };
 
