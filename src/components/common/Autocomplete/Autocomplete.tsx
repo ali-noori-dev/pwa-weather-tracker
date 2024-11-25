@@ -71,14 +71,14 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   };
 
   const renderDropdownContent = () => {
-    if (!inputValue && defaultOptions) {
-      return defaultOptions;
+    if (!inputValue && defaultOptions?.length) {
+      return renderOptions(defaultOptions);
     } else if (loading) {
       return renderMessage("Loading...");
     } else if (!filteredOptions.length) {
       return renderMessage("No options");
     } else {
-      return renderOptions();
+      return renderOptions(filteredOptions);
     }
   };
 
@@ -86,8 +86,8 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     return <li className="autocomplete__message">{message}</li>;
   };
 
-  const renderOptions = () => {
-    return filteredOptions.map((item, index) => (
+  const renderOptions = (options: AutocompleteOption[]) => {
+    return options.map((item, index) => (
       <li
         key={item.label}
         onClick={() => handleSelectItem(item)}
@@ -96,7 +96,15 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
           highlightedIndex === index ? "autocomplete__option--highlighted" : ""
         }`}
       >
-        {item.label}
+        {item.startIcon && (
+          <span className="autocomplete__option__start-icon">
+            {item.startIcon}
+          </span>
+        )}
+
+        <span className="autocomplete__option__label">{item.label}</span>
+
+        {item.endIcon && item.endIcon}
       </li>
     ));
   };
@@ -105,20 +113,22 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
   useEffect(() => {
     if (inputValue.trim() === "") {
       setFilteredOptions(options);
+      onInputChange(inputValue);
     } else {
       const filtered = options.filter((item) =>
         item.label.toLowerCase().includes(inputValue.toLowerCase())
       );
       setFilteredOptions(filtered);
+
+      // Debounce for non-empty input values
+      const handler = setTimeout(() => {
+        onInputChange(inputValue);
+      }, 700);
+
+      return () => {
+        clearTimeout(handler);
+      };
     }
-
-    const handler = setTimeout(() => {
-      if (onInputChange) onInputChange(inputValue);
-    }, 700);
-
-    return () => {
-      clearTimeout(handler);
-    };
   }, [inputValue, options, onInputChange]);
 
   // Close dropdown when clicking outside the autocomplete

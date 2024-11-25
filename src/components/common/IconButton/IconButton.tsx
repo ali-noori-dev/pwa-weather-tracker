@@ -3,7 +3,7 @@ import "./IconButton.scss";
 
 interface IconButtonProps {
   children: React.ReactNode;
-  onClick: VoidFunction;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
   ariaLabel: string;
   size?: "small" | "medium" | "large";
   disabled?: boolean;

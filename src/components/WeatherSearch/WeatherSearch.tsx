@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { BsBookmarkFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
+import { MdClear } from "react-icons/md";
 import { useFavorites, useGetApi } from "../../hooks";
 import { fetchCitySuggestions, fetchWeatherByCity } from "../../services";
 import { AutocompleteOption, CityDetails } from "../../types";
-import { Autocomplete, Center, VFlex } from "../common";
-import FavoriteCitiesList from "../FavoriteCitiesList/FavoriteCitiesList";
+import { Autocomplete, Center, IconButton, VFlex } from "../common";
 import WeatherDetails from "../WeatherDetails/WeatherDetails";
 import "./WeatherSearch.scss";
 
@@ -49,6 +50,24 @@ const WeatherSearch: React.FC = () => {
     setSelectedCity(selectedItem.label);
   };
 
+  const defaultOptions = favorites.map((item) => ({
+    label: item,
+    startIcon: <BsBookmarkFill className="weather-search__bookmark-icon" />,
+    endIcon: (
+      <IconButton
+        ariaLabel="Remove favorite"
+        className="weather-search__delete-button"
+        size="small"
+        onClick={(e) => {
+          e.stopPropagation();
+          removeFavorite(item);
+        }}
+      >
+        <MdClear fontSize={20} />
+      </IconButton>
+    ),
+  }));
+
   return (
     <Center className="weather-search">
       <VFlex className="weather-search__container">
@@ -59,14 +78,7 @@ const WeatherSearch: React.FC = () => {
           startIcon={<FiSearch />}
           loading={loadingSuggestions}
           onInputChange={handleInputChange}
-          defaultOptions={
-            favorites.length > 0 && (
-              <FavoriteCitiesList
-                favorites={favorites}
-                removeFavorite={removeFavorite}
-              />
-            )
-          }
+          defaultOptions={defaultOptions}
         />
 
         {loadingWeather ? (
