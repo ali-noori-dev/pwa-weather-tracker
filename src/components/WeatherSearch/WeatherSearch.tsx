@@ -46,6 +46,27 @@ const WeatherSearch: React.FC = () => {
     }
   };
 
+  const renderWeatherContent = () => {
+    if (loadingWeather) {
+      return renderMessage("Loading weather data...");
+    } else if (weatherData) {
+      return (
+        <WeatherDetails
+          weatherData={weatherData}
+          selectedCity={selectedCity}
+          isFavorite={favorites.includes(selectedCity)}
+          toggleFavorite={toggleFavorite}
+        />
+      );
+    } else {
+      return renderMessage("Select a city to see the weather");
+    }
+  };
+
+  const renderMessage = (message: string) => (
+    <Center className="weather-search__message">{message}</Center>
+  );
+
   const favoriteOptions = favorites.map((item) => ({
     label: item,
     startIcon: <BsBookmarkFill className="weather-search__bookmark-icon" />,
@@ -67,22 +88,7 @@ const WeatherSearch: React.FC = () => {
           defaultOptions={favoriteOptions}
         />
 
-        {loadingWeather ? (
-          <Center className="weather-search__message">
-            Loading weather data...
-          </Center>
-        ) : weatherData ? (
-          <WeatherDetails
-            weatherData={weatherData}
-            selectedCity={selectedCity}
-            isFavorite={favorites.includes(selectedCity)}
-            toggleFavorite={toggleFavorite}
-          />
-        ) : (
-          <Center className="weather-search__message">
-            Select a city to see the weather
-          </Center>
-        )}
+        {renderWeatherContent()}
       </VFlex>
     </Center>
   );
