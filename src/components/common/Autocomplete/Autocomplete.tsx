@@ -4,6 +4,7 @@ import { AutocompleteOption, AutocompleteProps } from "../../../types";
 import Center from "../Center/Center";
 import Flex from "../Flex/Flex";
 import Spinner from "../Spinner/Spinner";
+import Tooltip from "../Tooltip/Tooltip";
 import "./Autocomplete.scss";
 
 const Autocomplete: React.FC<AutocompleteProps> = ({
@@ -182,13 +183,15 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
         {loading && <Spinner className="autocomplete__spinner" />}
 
         {inputValue && (
-          <Center>
-            <FiX
-              size={20}
-              onClick={handleClearInput}
-              className="autocomplete__clear-icon"
-            />
-          </Center>
+          <Tooltip title="Clear">
+            <Center>
+              <FiX
+                size={20}
+                onClick={handleClearInput}
+                className="autocomplete__clear-icon"
+              />
+            </Center>
+          </Tooltip>
         )}
       </Flex>
 
