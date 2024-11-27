@@ -1,0 +1,26 @@
+@use "styles/functions";
+
+.tooltip {
+  position: absolute;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: functions.spacing(2);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  z-index: 1000;
+
+  // Add space for the arrow
+  margin-top: functions.spacing(2);
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+  }
+}
