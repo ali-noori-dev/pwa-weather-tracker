@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { BsBookmarkFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
-import { MdClear } from "react-icons/md";
 import { useFavorites, useGetApi } from "../../hooks";
 import { fetchCitySuggestions, fetchWeatherByCity } from "../../services";
 import { AutocompleteOption, CityDetails } from "../../types";
-import { Autocomplete, Center, IconButton, Tooltip, VFlex } from "../common";
+import { Autocomplete, Center, VFlex } from "../common";
+import FavoriteDeleteButton from "../FavoriteDeleteButton/FavoriteDeleteButton";
 import WeatherDetails from "../WeatherDetails/WeatherDetails";
 import "./WeatherSearch.scss";
 
@@ -46,27 +46,11 @@ const WeatherSearch: React.FC = () => {
     }
   };
 
-  const onSelectCity = async (selectedItem: AutocompleteOption) => {
-    setSelectedCity(selectedItem.label);
-  };
-
-  const defaultOptions = favorites.map((item) => ({
+  const favoriteOptions = favorites.map((item) => ({
     label: item,
     startIcon: <BsBookmarkFill className="weather-search__bookmark-icon" />,
     endIcon: (
-      <Tooltip title="Delete">
-        <IconButton
-          ariaLabel="Delete favorite"
-          className="weather-search__delete-button"
-          size="small"
-          onClick={(e) => {
-            e.stopPropagation();
-            removeFavorite(item);
-          }}
-        >
-          <MdClear fontSize={20} />
-        </IconButton>
-      </Tooltip>
+      <FavoriteDeleteButton onRemoveFavorite={() => removeFavorite(item)} />
     ),
   }));
 
@@ -75,12 +59,12 @@ const WeatherSearch: React.FC = () => {
       <VFlex className="weather-search__container">
         <Autocomplete
           options={suggestions ?? []}
-          onSelect={onSelectCity}
+          onSelect={(selectedItem) => setSelectedCity(selectedItem.label)}
           placeholder="Search for a city"
           startIcon={<FiSearch />}
           loading={loadingSuggestions}
           onInputChange={handleInputChange}
-          defaultOptions={defaultOptions}
+          defaultOptions={favoriteOptions}
         />
 
         {loadingWeather ? (

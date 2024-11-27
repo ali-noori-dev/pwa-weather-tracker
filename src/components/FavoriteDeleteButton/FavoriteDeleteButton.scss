@@ -1,0 +1,12 @@
+.favorite-delete-button {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.autocomplete__option {
+  &:hover .favorite-delete-button {
+    opacity: 1;
+    visibility: visible;
+  }
+}
