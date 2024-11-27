@@ -38,7 +38,7 @@ const WeatherSearch: React.FC = () => {
   });
 
   const handleInputChange = (inputValue: string) => {
-    setCity(inputValue);
+    if (inputValue !== selectedCity) setCity(inputValue);
 
     if (!inputValue) {
       setSelectedCity("");
