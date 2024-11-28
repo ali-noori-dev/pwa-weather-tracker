@@ -1,5 +1,5 @@
 import React from "react";
-import Flex from "../Flex/Flex";
+import { Flex } from "../../common";
 
 interface CenterProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FiX } from "react-icons/fi";
 import { AutocompleteOption, AutocompleteProps } from "../../../types";
-import Center from "../Center/Center";
-import Flex from "../Flex/Flex";
-import Spinner from "../Spinner/Spinner";
-import Tooltip from "../Tooltip/Tooltip";
+import { Center, Flex, Spinner, Tooltip } from "../../common";
 import "./Autocomplete.scss";
 
 const Autocomplete: React.FC<AutocompleteProps> = ({

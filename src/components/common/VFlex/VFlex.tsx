@@ -1,5 +1,5 @@
 import React from "react";
-import Flex, { FlexProps } from "../Flex/Flex";
+import { Flex, FlexProps } from "../../common";
 
 const VFlex: React.FC<Omit<FlexProps, "direction">> = ({
   children,

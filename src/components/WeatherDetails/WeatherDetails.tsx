@@ -1,9 +1,9 @@
 import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { FaWind } from "react-icons/fa";
 import { WiHumidity } from "react-icons/wi";
+import { WeatherIcon } from "../../components";
 import { WeatherData } from "../../types";
 import { Button, Flex, VFlex } from "../common";
-import WeatherIcon from "../WeatherIcon/WeatherIcon";
 import "./WeatherDetails.scss";
 
 interface WeatherDetailsProps {

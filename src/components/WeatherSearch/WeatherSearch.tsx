@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { BsBookmarkFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
+import { FavoriteDeleteButton, WeatherDetails } from "../../components";
 import { useFavorites, useGetApi } from "../../hooks";
 import { fetchCitySuggestions, fetchWeatherByCity } from "../../services";
 import { AutocompleteOption, CityDetails } from "../../types";
 import { Autocomplete, Center, VFlex } from "../common";
-import FavoriteDeleteButton from "../FavoriteDeleteButton/FavoriteDeleteButton";
-import WeatherDetails from "../WeatherDetails/WeatherDetails";
 import "./WeatherSearch.scss";
 
 const WeatherSearch: React.FC = () => {
