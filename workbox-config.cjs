@@ -1,13 +1,11 @@
-export default {
+module.exports = {
   globDirectory: "dist/",
-  globPatterns: [
-    "**/*.{html,js,css,png,svg,woff2,json}", // Adjust based on your assets
-  ],
+  globPatterns: ["**/*.{html,js,css,png,svg,woff2,json}"],
   swDest: "dist/sw.js",
   runtimeCaching: [
     {
       urlPattern: /^https:\/\/api\.openweathermap\.org\/data\/2\.5\/weather/,
-      handler: "NetworkFirst", // Cache API responses
+      handler: "NetworkFirst",
       options: {
         cacheName: "weather-api-cache",
         expiration: {
@@ -18,7 +16,7 @@ export default {
     },
     {
       urlPattern: /^https:\/\/wft-geo-db\.p\.rapidapi\.com\/v1\/geo\/places/,
-      handler: "StaleWhileRevalidate", // Cache city suggestions API
+      handler: "StaleWhileRevalidate",
       options: {
         cacheName: "city-suggestions-cache",
         expiration: {
