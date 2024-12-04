@@ -1,0 +1,19 @@
+@use "styles/functions";
+
+.offline-message {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: functions.spacing(2) functions.spacing(4);
+  z-index: 1000;
+  gap: 4px;
+  align-items: center;
+}
+
+.offline-icon {
+  font-size: 20px;
+}
