@@ -11,6 +11,7 @@ export default defineConfig({
         "icons/favicon.svg",
         "icons/favicon.ico",
         "robots.txt",
+        "offline.html",
         "icons/apple-touch-icon.png",
         "images/background.jpg",
       ],
@@ -37,33 +38,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/api\.openweathermap\.org\//, // Cache weather API responses
-            handler: "NetworkFirst", // Use NetworkFirst caching strategy for API calls
-            options: {
-              cacheName: "weather-api-cache",
-              expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24, // Cache responses for 1 day
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-          {
-            urlPattern: /\.(?:png|jpg|jpeg|svg)$/, // Cache image files
-            handler: "CacheFirst",
-            options: {
-              cacheName: "image-cache",
-              expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 7, // Cache images for 1 week
-              },
-            },
-          },
-        ],
+        navigateFallback: "/offline.html",
       },
     }),
   ],
@@ -76,10 +51,16 @@ export default defineConfig({
     },
   },
   resolve: {
-    // Set up alias for cleaner imports
     alias: {
       "@": "/src",
+      components: "/src/components",
+      constants: "/src/constants",
+      hooks: "/src/hooks",
+      services: "/src/services",
+      serviceWorkers: "/src/serviceWorkers",
       styles: "/src/styles",
+      types: "/src/types",
+      utils: "/src/utils",
     },
   },
   server: {
