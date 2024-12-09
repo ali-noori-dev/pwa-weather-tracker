@@ -57,7 +57,7 @@ export default defineConfig({
       constants: "/src/constants",
       hooks: "/src/hooks",
       services: "/src/services",
-      serviceWorkers: "/src/serviceWorkers",
+      serviceWorker: "/src/serviceWorker",
       styles: "/src/styles",
       types: "/src/types",
       utils: "/src/utils",
