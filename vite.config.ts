@@ -66,4 +66,16 @@ export default defineConfig({
   server: {
     port: 5174,
   },
+  build: {
+    outDir: "dist",
+    assetsDir: "assets",
+    manifest: true,
+    rollupOptions: {
+      output: {
+        assetFileNames: "assets/[name].[hash].[ext]",
+        chunkFileNames: "assets/[name].[hash].js",
+        entryFileNames: "assets/[name].[hash].js",
+      },
+    },
+  },
 });
