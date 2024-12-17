@@ -1,3 +1,5 @@
+const CACHE_VERSION = "v1";
+
 module.exports = {
   globDirectory: "dist/",
   globPatterns: ["**/*.{html,js,css,png,svg,woff2,json,jpg}"],
@@ -7,7 +9,7 @@ module.exports = {
       urlPattern: /^https:\/\/api\.openweathermap\.org\/data\/2\.5\/weather/,
       handler: "NetworkFirst",
       options: {
-        cacheName: "weather-api-cache",
+        cacheName: `weather-api-cache-${CACHE_VERSION}`,
         expiration: {
           maxEntries: 50,
           maxAgeSeconds: 60 * 60, // Cache for 1 hour
@@ -18,7 +20,7 @@ module.exports = {
       urlPattern: /^https:\/\/wft-geo-db\.p\.rapidapi\.com\/v1\/geo\/places/,
       handler: "StaleWhileRevalidate",
       options: {
-        cacheName: "city-suggestions-cache",
+        cacheName: `city-suggestions-cache-${CACHE_VERSION}`,
         expiration: {
           maxEntries: 50,
           maxAgeSeconds: 60 * 60, // Cache for 1 hour
