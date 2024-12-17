@@ -1,6 +1,7 @@
 export function registerServiceWorker() {
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
+    if (import.meta.env.PROD) {
+      // Register only in production mode
       navigator.serviceWorker
         .register("/sw.js")
         .then((registration) => {
@@ -9,6 +10,6 @@ export function registerServiceWorker() {
         .catch((error) => {
           console.error("Service Worker registration failed: ", error);
         });
-    });
+    }
   }
 }
