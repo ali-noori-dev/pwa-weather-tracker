@@ -27,5 +27,27 @@ module.exports = {
         },
       },
     },
+    {
+      urlPattern: /\.(?:png|jpg|jpeg|svg|woff2|ttf|otf|eot)$/, // Cache assets like images and fonts
+      handler: "CacheFirst",
+      options: {
+        cacheName: `static-assets-cache-${CACHE_VERSION}`,
+        expiration: {
+          maxEntries: 100,
+          maxAgeSeconds: 60 * 60 * 24 * 30, // Cache for 1 month
+        },
+      },
+    },
+    {
+      urlPattern: ({ request }) => request.mode === "navigate", // Cache navigation requests (HTML pages)
+      handler: "NetworkFirst",
+      options: {
+        cacheName: `html-cache-${CACHE_VERSION}`,
+        expiration: {
+          maxEntries: 10,
+          maxAgeSeconds: 60 * 60 * 24 * 7, // Cache for 1 week
+        },
+      },
+    },
   ],
 };
