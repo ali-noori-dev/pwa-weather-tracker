@@ -11,7 +11,6 @@ export default defineConfig({
         "icons/favicon.svg",
         "icons/favicon.ico",
         "robots.txt",
-        "offline.html",
         "icons/apple-touch-icon.png",
         "images/background.jpg",
       ],
@@ -36,9 +35,6 @@ export default defineConfig({
             type: "image/png",
           },
         ],
-      },
-      workbox: {
-        navigateFallback: "/offline.html",
       },
     }),
   ],
