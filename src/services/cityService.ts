@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CityDetails, CitySearchResult } from "../types";
+import { CityDetails, CitySearchResult } from "types";
 
 const BASE_URL = import.meta.env.VITE_GEODB_API_BASE_URL;
 const API_KEY = import.meta.env.VITE_GEODB_API_KEY;

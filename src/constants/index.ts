@@ -1,2 +1,2 @@
-export * from "./localStorageKeys";
-export * from "./weatherIcons";
+export * from "./localStorageKeys.ts";
+export * from "./weatherIconPaths";

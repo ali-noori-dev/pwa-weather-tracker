@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.json", // Inherit baseUrl and paths
   "compilerOptions": {
     "target": "ES2022",
     "lib": ["ES2023"],

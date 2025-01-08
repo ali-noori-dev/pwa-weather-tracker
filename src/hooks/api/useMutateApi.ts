@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
-import { ApiErrorResponse, ApiState } from "../../types";
+import { ApiErrorResponse, ApiState } from "types";
 import { handleApiError, initialState } from "./apiStateUtils";
 
 interface UseMutateApiArgs<T, P> {

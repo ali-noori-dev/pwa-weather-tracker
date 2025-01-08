@@ -1,6 +1,6 @@
+import { LocalStorageKeys } from "constants/localStorageKeys";
 import { useEffect, useState } from "react";
-import { LocalStorageKeys } from "../constants";
-import { getLocalStorageItem, setLocalStorageItem } from "../utils";
+import { getLocalStorageItem, setLocalStorageItem } from "utils";
 
 export const useFavorites = (selectedCity: string) => {
   const [favorites, setFavorites] = useState<string[]>([]);

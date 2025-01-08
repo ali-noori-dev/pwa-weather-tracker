@@ -1,6 +1,6 @@
+import { Flex } from "components/common";
 import React, { useEffect, useState } from "react";
 import { RiWifiOffLine } from "react-icons/ri";
-import { Flex } from "../common";
 import "./NetworkStatus.scss";
 
 const NetworkStatus: React.FC = () => {

@@ -1,4 +1,4 @@
-import { NetworkStatus, WeatherSearch } from "./components";
+import { NetworkStatus, WeatherSearch } from "components";
 import "./styles/main.scss";
 
 function App() {

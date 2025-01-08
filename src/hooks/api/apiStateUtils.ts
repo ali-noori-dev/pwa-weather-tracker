@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { ApiErrorResponse, ApiState } from "../../types";
+import { ApiErrorResponse, ApiState } from "types";
 
 export const initialState = <T>() => ({
   data: null as T | null,
