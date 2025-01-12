@@ -19,10 +19,11 @@ export default defineConfig({
         short_name: "WeatherTracker",
         description:
           "A PWA for tracking weather conditions with offline access and push notifications.",
-        theme_color: "#ffffff",
+        theme_color: "#1976d2",
         background_color: "#ffffff",
         display: "standalone",
-        start_url: "/", // Entry point when launched from home screen
+        start_url: "https://pwa-weather-tracker.netlify.app/",
+        scope: "https://pwa-weather-tracker.netlify.app/",
         icons: [
           {
             src: "/icons/android-chrome-192x192.png",
