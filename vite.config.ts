@@ -25,6 +25,12 @@ export default defineConfig({
         display: "standalone",
         start_url: "https://pwa-weather-tracker.netlify.app/",
         scope: "https://pwa-weather-tracker.netlify.app/",
+        protocol_handlers: [
+          {
+            protocol: "weather",
+            url: "/?city=%s",
+          },
+        ],
         icons: [
           {
             src: "/icons/android-chrome-192x192.png",
