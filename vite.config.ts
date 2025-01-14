@@ -27,7 +27,7 @@ export default defineConfig({
         scope: "https://pwa-weather-tracker.netlify.app/",
         protocol_handlers: [
           {
-            protocol: "weather",
+            protocol: "web+weather",
             url: "/?city=%s",
           },
         ],
