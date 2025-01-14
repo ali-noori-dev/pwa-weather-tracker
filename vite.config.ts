@@ -15,6 +15,7 @@ export default defineConfig({
         "images/background.jpg",
       ],
       manifest: {
+        id: "/",
         name: "PWA Weather Tracker",
         short_name: "WeatherTracker",
         description:
