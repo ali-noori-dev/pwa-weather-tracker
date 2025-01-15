@@ -140,7 +140,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
         clearTimeout(handler);
       };
     }
-  }, [inputValue, options, onInputChange]);
+  }, [inputValue, options]);
 
   // Close dropdown when clicking outside the autocomplete
   useEffect(() => {

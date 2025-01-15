@@ -80,7 +80,6 @@ const WeatherSearch: React.FC = () => {
       const cityName = window.location.href.replace(protocolPrefix, "");
       if (cityName) {
         setSelectedCity(cityName);
-        setCity(cityName);
       }
     }
   };
