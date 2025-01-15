@@ -1,7 +1,7 @@
 import { FavoriteDeleteButton, WeatherDetails } from "components";
 import { Autocomplete, Center, VFlex } from "components/common";
 import { useFavorites, useGetApi } from "hooks";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsBookmarkFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { fetchCitySuggestions, fetchWeatherByCity } from "services";
@@ -13,6 +13,14 @@ const WeatherSearch: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState<string>("");
   const { favorites, toggleFavorite, removeFavorite } =
     useFavorites(selectedCity);
+
+  const favoriteOptions = favorites.map((item) => ({
+    label: item,
+    startIcon: <BsBookmarkFill className="weather-search__bookmark-icon" />,
+    endIcon: (
+      <FavoriteDeleteButton onRemoveFavorite={() => removeFavorite(item)} />
+    ),
+  }));
 
   const transformCitySuggestions = (
     data: CityDetails[]
@@ -66,13 +74,28 @@ const WeatherSearch: React.FC = () => {
     <Center className="weather-search__message">{message}</Center>
   );
 
-  const favoriteOptions = favorites.map((item) => ({
-    label: item,
-    startIcon: <BsBookmarkFill className="weather-search__bookmark-icon" />,
-    endIcon: (
-      <FavoriteDeleteButton onRemoveFavorite={() => removeFavorite(item)} />
-    ),
-  }));
+  const handleProtocolNavigation = () => {
+    const protocolPrefix = "web+weather://";
+    if (window.location.href.startsWith(protocolPrefix)) {
+      const cityName = window.location.href.replace(protocolPrefix, "");
+      if (cityName) {
+        setSelectedCity(cityName);
+        setCity(cityName);
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Call the handler on component mount to handle initial protocol navigation
+    handleProtocolNavigation();
+
+    // Listen for future protocol navigation
+    window.addEventListener("popstate", handleProtocolNavigation);
+
+    return () => {
+      window.removeEventListener("popstate", handleProtocolNavigation);
+    };
+  }, []);
 
   return (
     <Center className="weather-search">
