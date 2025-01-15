@@ -25,6 +25,7 @@ export default defineConfig({
         display: "standalone",
         start_url: "https://pwa-weather-tracker.netlify.app/",
         scope: "https://pwa-weather-tracker.netlify.app/",
+        display_override: ["window-controls-overlay", "standalone"],
         protocol_handlers: [
           {
             protocol: "web+weather",
