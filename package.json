@@ -8,6 +8,7 @@
     "build": "vite build && npx workbox-cli generateSW workbox-config.cjs",
     "lint": "eslint .",
     "preview": "vite preview",
+    "start": "vite preview",
     "build-and-serve": "npm run build && npx serve dist"
   },
   "dependencies": {
