@@ -2,10 +2,25 @@
 
 A Progressive Web App (PWA) built with **React**, **TypeScript**, and **Vite** for tracking real-time weather conditions. The app supports offline access, push notifications, and is installable on mobile and desktop devices for a native-like experience.
 
+## **Screenshots**
+
+### Desktop View
+
+![Desktop Weather Dashboard](/public/screenshots/Desktop_screenshot.png)
+
+Weather dashboard showing current conditions and forecast
+
+### Mobile View
+
+![Mobile Weather Dashboard](/public/screenshots/Mobile_screenshot.png)
+
+Responsive mobile interface with city search
+
 ## **Features**
 
 - **Real-time Weather Data**: Fetches live weather data using the [OpenWeatherMap API](https://openweathermap.org/api).
 - **City Search Suggestions**: Retrieves city suggestions as the user types using the [GeoDB Cities API](https://rapidapi.com/wirefreethought/api/geodb-cities/).
+- **Advanced Caching**: Implements strategic caching for API responses and static assets to improve performance and offline functionality.
 - **Offline Support**: Works offline by caching API responses and static assets.
 - **Push Notifications**: Get weather alerts even when the app is closed.
 - **Installable**: Can be installed as a native app on mobile and desktop devices using PWA technology.
@@ -18,6 +33,7 @@ A Progressive Web App (PWA) built with **React**, **TypeScript**, and **Vite** f
 - **TypeScript**: Type-safe development to reduce errors and enhance maintainability.
 - **Sass**: CSS preprocessor for cleaner and reusable styles.
 - **Vite PWA Plugin**: Easily configure PWA features like service workers, caching, and manifest generation.
+- **OneSignal**: Cross-platform push notification service for web and mobile apps.
 
 ---
 
@@ -60,10 +76,30 @@ To get a local copy of the project up and running, follow these steps.
 
 ## **Available Scripts**
 
-- `npm run dev`: Starts the development server with **HMR** (Hot Module Replacement).
-- `npm run build`: Bundles the app for production.
-- `npm run preview`: Previews the production build locally.
-- `npm run lint`: Lints the code using **ESLint**.
+In the project directory, you can run:
+
+### `npm run dev`
+
+Runs the app in development mode.\
+Open [http://localhost:5175](http://localhost:5175) to view it in the browser.
+
+### `npm run build`
+
+Builds the app for production to the `dist` folder.\
+Generates service worker using Workbox.
+
+### `npm run lint`
+
+Runs ESLint to check for code style issues.
+
+### `npm run preview`
+
+Preview the production build locally.
+
+### `npm run build-and-serve`
+
+Builds the app for production and serves it using a local server.\
+Open [http://localhost:3000](http://localhost:3000) to view the production build.
 
 ---
 
@@ -71,7 +107,7 @@ To get a local copy of the project up and running, follow these steps.
 
 - **Service Worker**: Automatically generated and updated for offline support.
 - **Manifest File**: Provides metadata about the app, such as the name, icons, and theme color.
-- **Background Sync & Caching**: Leverages Workbox to cache API responses and static assets for improved offline performance.
+- **Caching**: Leverages Workbox to cache API responses and static assets for improved offline performance.
 
 ### **Testing PWA Features**
 

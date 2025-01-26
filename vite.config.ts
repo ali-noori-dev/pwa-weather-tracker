@@ -15,14 +15,23 @@ export default defineConfig({
         "images/background.jpg",
       ],
       manifest: {
+        id: "/",
         name: "PWA Weather Tracker",
         short_name: "WeatherTracker",
         description:
           "A PWA for tracking weather conditions with offline access and push notifications.",
-        theme_color: "#ffffff",
+        theme_color: "#1976d2",
         background_color: "#ffffff",
         display: "standalone",
-        start_url: "/", // Entry point when launched from home screen
+        start_url: "https://pwa-weather-tracker.netlify.app/",
+        scope: "https://pwa-weather-tracker.netlify.app/",
+        display_override: ["window-controls-overlay", "standalone"],
+        protocol_handlers: [
+          {
+            protocol: "web+weather",
+            url: "/?city=%s",
+          },
+        ],
         icons: [
           {
             src: "/icons/android-chrome-192x192.png",
@@ -33,6 +42,20 @@ export default defineConfig({
             src: "/icons/android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
+          },
+        ],
+        screenshots: [
+          {
+            src: "/screenshots/Desktop_screenshot.png",
+            sizes: "1440x730",
+            type: "image/png",
+            form_factor: "wide", // For desktop
+          },
+          {
+            src: "/screenshots/Mobile_screenshot.png",
+            sizes: "458x612",
+            type: "image/png",
+            form_factor: "narrow", // For mobile
           },
         ],
       },

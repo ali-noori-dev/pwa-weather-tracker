@@ -1,5 +1,5 @@
 import axios from "axios";
-import { WeatherData } from "../types";
+import { WeatherData } from "types";
 
 const BASE_URL = import.meta.env.VITE_WEATHER_API_BASE_URL;
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;

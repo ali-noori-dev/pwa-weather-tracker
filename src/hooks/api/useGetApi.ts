@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ApiState } from "../../types";
+import { ApiState } from "types";
 import { handleApiError, initialState } from "./apiStateUtils";
 
 interface UseGetApiArgs<T, P, R = T> {

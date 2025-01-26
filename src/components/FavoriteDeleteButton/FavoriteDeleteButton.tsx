@@ -1,5 +1,5 @@
+import { IconButton, Tooltip } from "components/common";
 import { MdClear } from "react-icons/md";
-import { IconButton, Tooltip } from "../common";
 import "./FavoriteDeleteButton.scss";
 
 interface FavoriteDeleteButton {

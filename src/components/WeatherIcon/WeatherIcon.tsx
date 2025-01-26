@@ -1,5 +1,5 @@
+import { weatherIconPaths } from "constants/weatherIconPaths";
 import React from "react";
-import { weatherIconPaths } from "../../constants";
 import "./WeatherIcon.scss";
 
 interface WeatherIconProps {
